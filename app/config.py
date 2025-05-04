@@ -1,6 +1,6 @@
 import json
-from pydantic import BaseSettings
-from typing import List
+from pydantic_settings import BaseSettings
+from typing import List, Optional
 
 class Settings(BaseSettings):
     """
@@ -18,14 +18,14 @@ class Settings(BaseSettings):
     ENVIRONMENT: str = "local"
     
     # Configuración CORS
-    CORS_ORIGINS_STR: str = '["http://localhost:3000","http://localhost:8000"]'
+    CORS_ORIGINS_STR: Optional[str] = '["http://localhost:3000","http://localhost:8000"]'
     
     @property
     def CORS_ORIGINS(self) -> List[str]:
         """
         Convertir la cadena JSON a lista de orígenes permitidos para CORS
         """
-        return json.loads(self.CORS_ORIGINS_STR)
+        return json.loads(self.CORS_ORIGINS_STR) if self.CORS_ORIGINS_STR else []
     
     @property
     def is_production(self) -> bool:
@@ -34,12 +34,11 @@ class Settings(BaseSettings):
         """
         return self.ENVIRONMENT.lower() == "production"
     
-    class Config:
-        """
-        Configuración de Pydantic para cargar variables desde .env
-        """
-        env_file = ".env"  # Carga desde .env
-        case_sensitive = True
+    model_config = {
+        "env_file": ".env",
+        "case_sensitive": True,
+        "extra": "allow"
+    }
 
 # Crear instancia de configuración global
 settings = Settings()
