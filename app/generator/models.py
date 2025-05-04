@@ -1,6 +1,6 @@
 import random
 from typing import List, Optional
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator
 from app.config import lorem_settings
 
 # Modelos para la API
@@ -26,13 +26,13 @@ class LoremIpsumRequest(BaseModel):
             raise ValueError(f"El mínimo de palabras ({self.min_words}) no puede ser mayor que el máximo ({self.max_words})")
         return True
     
-    @validator('paragraphs')
+    @field_validator('paragraphs')
     def validate_paragraphs(cls, v):
         if v > lorem_settings.MAX_PARAGRAPHS:
             raise ValueError(f"El número máximo de párrafos permitido es {lorem_settings.MAX_PARAGRAPHS}")
         return v
     
-    @validator('max_words')
+    @field_validator('max_words')
     def validate_max_words(cls, v):
         if v > lorem_settings.MAX_WORDS_PER_PARAGRAPH:
             raise ValueError(f"El número máximo de palabras por párrafo permitido es {lorem_settings.MAX_WORDS_PER_PARAGRAPH}")
