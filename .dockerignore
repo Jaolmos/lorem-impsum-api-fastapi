@@ -1,0 +1,24 @@
+# Entorno virtual
+venv/
+env/
+ENV/
+
+# Archivos compilados de Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Archivos de desarrollo
+.git
+.gitignore
+.vscode/
+.idea/
+.env
+*.log
+notes.txt
+
+# Archivos Docker
+Dockerfile
+docker-compose.yml
