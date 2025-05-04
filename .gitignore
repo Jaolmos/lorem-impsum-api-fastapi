@@ -25,3 +25,8 @@ build/
 *.swp
 *.swo
 .DS_Store
+
+
+# Archivos de notas personales
+notes.txt
+*.notes
