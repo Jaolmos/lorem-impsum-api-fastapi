@@ -157,7 +157,7 @@ Este proyecto está licenciado bajo la licencia MIT - ver el archivo LICENSE par
 
 ## Autor
 
-[Tu nombre] - [Tu sitio web/GitHub]
+Jaolmos - https://github.com/Jaolmos
 
 ---
 
