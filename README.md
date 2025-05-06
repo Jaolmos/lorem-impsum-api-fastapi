@@ -4,7 +4,6 @@ API REST desarrollada con FastAPI para generar texto Lorem Ipsum personalizable.
 
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?style=flat-square&logo=fastapi)
 ![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=flat-square&logo=python)
-![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=flat-square&logo=docker)
 
 ## Características
 
@@ -13,7 +12,6 @@ API REST desarrollada con FastAPI para generar texto Lorem Ipsum personalizable.
 - ✅ Control sobre la longitud de los párrafos (min/max palabras)
 - ✅ Opción para iniciar con la frase clásica "Lorem ipsum dolor sit amet"
 - ✅ Documentación interactiva con Swagger UI y ReDoc
-- ✅ Completamente dockerizado
 - ✅ Endpoints RESTful para integración sencilla
 
 ## Tecnologías
@@ -21,14 +19,12 @@ API REST desarrollada con FastAPI para generar texto Lorem Ipsum personalizable.
 - [FastAPI](https://fastapi.tiangolo.com/): Framework web moderno y de alto rendimiento
 - [Uvicorn](https://www.uvicorn.org/): Servidor ASGI de alto rendimiento
 - [Pydantic](https://docs.pydantic.dev/): Validación de datos y configuración
-- [Docker](https://www.docker.com/): Contenedorización para despliegue sencillo
 
 ## Instalación y Uso
 
 ### Requisitos previos
 
 - Python 3.11+
-- Docker (opcional, para despliegue con contenedores)
 
 ### Instalación local
 
@@ -92,62 +88,18 @@ CORS_ORIGINS_STR=["http://localhost:3000","http://localhost:8000"]
 
 #### Configuración para entorno de producción
 
-En producción, especialmente al usar Docker, las variables se configuran automáticamente con valores seguros:
+Para configurar el entorno de producción, puedes crear un archivo `.env` con estos valores:
 
 ```ini
+API_HOST=0.0.0.0
+API_PORT=8000
 API_RELOAD=false
 DEBUG=false
 ENVIRONMENT=production
+CORS_ORIGINS_STR=["https://tudominio.com"]
 ```
 
-Puedes sobrescribir estas variables al ejecutar el contenedor Docker:
-
-```bash
-docker run -d -p 8000:8000 \
-  -e API_PORT=8000 \
-  -e DEBUG=false \
-  -e ENVIRONMENT=production \
-  -e CORS_ORIGINS_STR='["https://tudominio.com"]' \
-  --name lorem-api lorem-ipsum-api:latest
-```
-
-### Despliegue con Docker
-
-#### Construcción de la imagen:
-```
-# Construir la imagen
-docker build -t lorem-ipsum-api:latest .
-
-# Reconstruir sin caché (útil si hay problemas)
-docker build --no-cache -t lorem-ipsum-api:latest .
-```
-
-#### Ejecución del contenedor:
-```
-# Ejecutar en primer plano (ver logs directamente)
-docker run -p 8000:8000 --name lorem-api lorem-ipsum-api:latest
-
-# Ejecutar en segundo plano
-docker run -d -p 8000:8000 --name lorem-api lorem-ipsum-api:latest
-
-# Ejecutar en segundo plano con reinicio automático
-docker run -d --restart always -p 8000:8000 --name lorem-api lorem-ipsum-api:latest
-```
-
-#### Gestión del contenedor:
-```
-# Detener el contenedor
-docker stop lorem-api
-
-# Iniciar el contenedor si está detenido
-docker start lorem-api
-
-# Reiniciar el contenedor
-docker restart lorem-api
-
-# Eliminar el contenedor (debe estar detenido)
-docker rm lorem-api
-```
+O establecer estas variables de entorno directamente en tu sistema o servicio de hosting.
 
 ## API Endpoints
 
